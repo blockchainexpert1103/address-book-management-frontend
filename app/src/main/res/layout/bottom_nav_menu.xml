@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/ic_favorites"
+        android:title="お気に入り" />
+
+    <item
+        android:id="@+id/nav_recents"
+        android:icon="@drawable/ic_recents"
+        android:title="履歴" />
+
+    <item
+        android:id="@+id/nav_contacts"
+        android:icon="@drawable`/ic_contacts"
+        android:title="連絡先" />
+</menu>
