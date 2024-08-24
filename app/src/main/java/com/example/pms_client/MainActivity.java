@@ -90,13 +90,11 @@ public class MainActivity extends AppCompatActivity {
         positiveButton.setOnClickListener(v -> {
             if (radio1.isChecked()) {
                 Toast.makeText(MainActivity.this, "電話 現在のデフォルトが選択されました", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, Favorite.class);
+                startActivity(intent);
             } else if (radio2.isChecked()) {
                 Toast.makeText(MainActivity.this, "電話が選択されました", Toast.LENGTH_SHORT).show();
             }
-
-            Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-            startActivity(intent);
-
             dialog.dismiss();  // Close the dialog after the positive action
         });
     }

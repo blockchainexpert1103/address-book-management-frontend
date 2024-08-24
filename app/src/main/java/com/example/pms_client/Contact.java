@@ -2,12 +2,14 @@ package com.example.pms_client;
 
 public class Contact {
     private String name;
-    private String phoneNumber;
+    private String officePhone;
+    private String mobilePhone;
     private int iconResourceId;
 
-    public Contact(String name, String phoneNumber, int iconResourceId) {
+    public Contact(String name, String officePhone, String mobilePhone, int iconResourceId) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.officePhone = officePhone;
+        this.mobilePhone = mobilePhone;
         this.iconResourceId = iconResourceId;
     }
 
@@ -15,10 +17,12 @@ public class Contact {
         return name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getOfficePhone() {
+        return officePhone;
     }
-
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
     public int getIconResourceId() {
         return iconResourceId;
     }
