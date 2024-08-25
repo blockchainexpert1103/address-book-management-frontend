@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,10 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.pms_client.Favorite"></activity>
-        <activity android:name="com.example.pms_client.FavoriteAdd"></activity>
-        <activity android:name="com.example.pms_client.SMSSend"></activity>
-
+        <activity android:name="com.example.pms_client.Favorite"/>
+        <activity android:name="com.example.pms_client.FavoriteAdd" />
+        <activity android:name="com.example.pms_client.SMSSend"/>
 
     </application>
 

@@ -1,22 +1,30 @@
 package com.example.pms_client;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.provider.OpenableColumns;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class SMSSend extends AppCompatActivity {
 
     TextView textView;
+    private static final int REQUEST_CALL_PERMISSION = 1;
+
+    private static String mobile_number = "";
     private ActivityResultLauncher<Intent> filePickerLauncher;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +46,24 @@ public class SMSSend extends AppCompatActivity {
 
         // Retrieve the contact details passed from the ContactAdapter
         String contactName = getIntent().getStringExtra("contact_name");
-        String mobilePhone = getIntent().getStringExtra("mobile_phone");
+        mobile_number = getIntent().getStringExtra("mobile_phone");
 
         // Set the contact details to views if needed
         // For example, set the contact name on a TextView in sms_send.xml
         TextView titleTextView = findViewById(R.id.selected_username);
         titleTextView.setText(contactName);
+
+        // Call
+        ImageView callButton = findViewById(R.id.selected_user_call);
+        callButton.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // Request permission if not granted
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PERMISSION);
+            } else {
+                // Permission already granted, make the call
+                makePhoneCall(mobile_number);
+            }
+        });
 
         // Set up the back button
         ImageView backButton = findViewById(R.id.sms_send_back);
@@ -56,6 +76,27 @@ public class SMSSend extends AppCompatActivity {
         attachFile.setOnClickListener(v -> openFileChooser("file/*"));
         attachImage.setOnClickListener(v -> openFileChooser("image/*"));
 
+    }
+
+    private void makePhoneCall(String mobile_number) {
+        Log.d("MakePhoneCall", "makePhoneCall method called with phoneNumber: " + mobile_number);
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + mobile_number));
+        startActivity(callIntent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CALL_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, make the call
+                makePhoneCall(mobile_number);
+            } else {
+                // Permission denied
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void openFileChooser(String mimeType) {

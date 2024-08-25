@@ -1,12 +1,21 @@
 package com.example.pms_client;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.content.Intent;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +49,6 @@ public class Favorite extends AppCompatActivity {
         List<Contact> contacts = new ArrayList<>();
         contacts.add(new Contact("田崎 幸治", "0761-55-3487", "090-4275-0206",  R.drawable.ic_contact_default)); // Use your own drawable
         contacts.add(new Contact("谷口 日野自動車", "", "090-4275-0203",  R.drawable.ic_contact_default));
-
         return contacts;
     }
 }
