@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
+    private static final int REQUEST_CALL_PERMISSION = 1;
     private List<Contact> contactList;
     private boolean isFavoriteView = true; // Add a boolean flag to determine which layout to use
 
@@ -46,26 +47,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         Contact contact = contactList.get(position);
         holder.nameTextView.setText(contact.getName());
 
-        // Set mobile and office phones if available
-
         // Set mobile and office phone text views
         holder.mobileTextView.setText(contact.getMobilePhone().isEmpty() ? "" : "勤務先 " + contact.getMobilePhone());
         holder.officeTextView.setText(contact.getOfficePhone().isEmpty() ? "" : "携帯  " + contact.getOfficePhone());
 
         holder.iconImageView.setImageResource(contact.getIconResourceId());
 
-        // Set the click listener for contact_main_info
-        holder.contactMainInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.contactDetails.getVisibility() == View.GONE) {
-                    holder.contactDetails.setVisibility(View.VISIBLE);  // Show details
-                } else {
-                    holder.contactDetails.setVisibility(View.GONE);  // Hide details
-                }
+        // Handle contact_main_info click to show/hide details
+        holder.contactMainInfo.setOnClickListener(v -> {
+            if (holder.contactDetails.getVisibility() == View.GONE) {
+                holder.contactDetails.setVisibility(View.VISIBLE);
+            } else {
+                holder.contactDetails.setVisibility(View.GONE);
             }
         });
-        //
+
         // Set click listener for SMS send action
         holder.sms_send.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), SMSSend.class);
@@ -74,15 +70,34 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             v.getContext().startActivity(intent);
         });
 
+        // Set click listener for call history action
+        holder.callHistory.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CallHistory.class);
+            intent.putExtra("contact_name", contact.getName());
+            intent.putExtra("mobile_phone", contact.getMobilePhone());
+            v.getContext().startActivity(intent);
+        });
+
         // Handle phone icon visibility (only if using Favorite.xml)
         if (!isFavoriteView && holder.phoneIcon != null) {
             holder.phoneIcon.setVisibility(View.GONE);
-
         }
+
+        holder.phoneIcon.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(v.getContext(), Manifest.permission.CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Request permission through the Activity
+                if (v.getContext() instanceof Activity) {
+                    ActivityCompat.requestPermissions((Activity) v.getContext(),
+                            new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PERMISSION);
+                }
+            } else {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + contact.getMobilePhone()));
+                v.getContext().startActivity(callIntent);
+            }
+        });
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -98,6 +113,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         LinearLayout contactMainInfo;
         LinearLayout contactDetails;
         LinearLayout sms_send;
+        LinearLayout callHistory;
         ImageView phoneIcon; // Reference to the phone icon (for Favorite.xml)
 
         ContactViewHolder(View itemView) {
@@ -112,6 +128,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             contactDetails  = itemView.findViewById(R.id.contact_details);
             sms_send        = itemView.findViewById(R.id.sms_send);
             phoneIcon       = itemView.findViewById(R.id.favorite_ic_call); // Initialize phone icon
+            callHistory     = itemView.findViewById(R.id.call_history);
         }
     }
 }

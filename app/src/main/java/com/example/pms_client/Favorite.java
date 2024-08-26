@@ -11,15 +11,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Favorite extends AppCompatActivity {
+
+
     boolean isFavoriteView = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,10 @@ public class Favorite extends AppCompatActivity {
         // Set up adapter with dummy data
         ContactAdapter adapter = new ContactAdapter(getDummyContacts(), isFavoriteView);
         recyclerView.setAdapter(adapter);
+
+
     }
+
 
     // Dummy contacts data
     private List<Contact> getDummyContacts() {

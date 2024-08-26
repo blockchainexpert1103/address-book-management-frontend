@@ -19,7 +19,7 @@
                 android:id="@+id/contact_icon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_contact_default" />
 
             <LinearLayout
@@ -70,8 +70,9 @@
             android:visibility="gone"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:layout_marginRight="42dp"
-            android:layout_marginLeft="42dp">
+            android:layout_marginRight="59dp"
+            android:layout_marginLeft="66dp"
+            android:background="@drawable/rounded_background">
 
             <!-- Message Section -->
             <LinearLayout
@@ -81,7 +82,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="8dp">
+                android:padding="4dp">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -100,12 +101,13 @@
 
             <!-- Open History Section -->
             <LinearLayout
+                android:id="@+id/call_history"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="8dp">
+                android:padding="4dp">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -129,7 +131,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="8dp">
+                android:padding="4dp">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -146,4 +148,4 @@
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>

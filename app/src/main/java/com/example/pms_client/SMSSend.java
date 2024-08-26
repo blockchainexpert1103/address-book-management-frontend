@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.provider.OpenableColumns;
 import android.util.Log;
+import android.widget.PopupMenu;
+import android.view.View;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -53,6 +57,10 @@ public class SMSSend extends AppCompatActivity {
         TextView titleTextView = findViewById(R.id.selected_username);
         titleTextView.setText(contactName);
 
+        //bottom_nav_menu
+        ImageView bottomNavMenu = findViewById(R.id.bottom_nav_menu);
+        bottomNavMenu.setOnClickListener( v-> showPopupMenu(v));
+
         // Call
         ImageView callButton = findViewById(R.id.selected_user_call);
         callButton.setOnClickListener(v -> {
@@ -77,6 +85,30 @@ public class SMSSend extends AppCompatActivity {
         attachImage.setOnClickListener(v -> openFileChooser("image/*"));
 
     }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.sms_popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // Handle menu item clicks here
+                int itemId = item.getItemId();
+                if (itemId == R.id.menu_search) {
+                    Toast.makeText(SMSSend.this, "Search clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (itemId == R.id.menu_show_input) {
+                    Toast.makeText(SMSSend.this, "Show input clicked", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        popupMenu.show();
+    }
+
 
     private void makePhoneCall(String mobile_number) {
         Log.d("MakePhoneCall", "makePhoneCall method called with phoneNumber: " + mobile_number);

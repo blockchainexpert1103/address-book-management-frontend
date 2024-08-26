@@ -29,12 +29,8 @@ public class FavoriteAdd extends AppCompatActivity {
 
         // Set up the back button
         ImageView backButton = findViewById(R.id.favorite_back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();  // Finish the current activity and go back to the previous one
-            }
-        });
+        //
+        backButton.setOnClickListener(v -> finish());
     }
 
     // Dummy contacts data

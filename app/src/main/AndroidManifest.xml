@@ -28,7 +28,7 @@
         <activity android:name="com.example.pms_client.Favorite"/>
         <activity android:name="com.example.pms_client.FavoriteAdd" />
         <activity android:name="com.example.pms_client.SMSSend"/>
-
+        <activity android:name="com.example.pms_client.CallHistory"/>
     </application>
 
 </manifest>
