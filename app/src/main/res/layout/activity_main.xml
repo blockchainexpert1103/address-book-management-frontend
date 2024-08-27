@@ -8,10 +8,10 @@
     <!-- App Icon -->
     <ImageView
         android:id="@+id/appIcon"
-        android:layout_width="304dp"
+        android:layout_width="244dp"
         android:layout_height="244dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/start" />
 
     <!-- Description Text -->
@@ -21,35 +21,38 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/appIcon"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
         android:text="電話アプリをデフォルトとして設定してください"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textFontWeight="800"
         android:fontFamily="sans-serif-medium" />
 
     <!-- Detailed Information Text -->
+
+    <!-- Default Button -->
     <TextView
         android:id="@+id/detailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/descriptionText"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
         android:text="電話アプリで通話の発着信を行うには、これをデフォルトの通話アプリに設定する必要があります。"
         android:textColor="#666666"
-        android:textSize="24sp"
-        android:layout_marginHorizontal="20dp"
-        android:gravity="center"
-        android:fontFamily="sans-serif" />
+        android:textSize="24sp" />
 
-    <!-- Default Button -->
     <Button
         android:id="@+id/defaultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="デフォルトとして設定してください"
         android:textColor="#FFFFFF"

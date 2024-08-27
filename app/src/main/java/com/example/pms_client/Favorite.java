@@ -45,7 +45,6 @@ public class Favorite extends AppCompatActivity {
         ContactAdapter adapter = new ContactAdapter(getDummyContacts(), isFavoriteView);
         recyclerView.setAdapter(adapter);
 
-
     }
 
 
