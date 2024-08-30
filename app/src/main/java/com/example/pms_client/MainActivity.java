@@ -15,16 +15,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    RadioButton radio1, radio2;
+    RadioButton radioSelectApp, radioSelectPhone;
     Button positiveButton;
-    TextView text2;
+    TextView txtAppDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button defaultButton = findViewById(R.id.defaultButton);
+        Button defaultButton = findViewById(R.id.main_start_button);
 
         defaultButton.setOnClickListener(v -> {
             showSetDefaultDialog();
@@ -32,28 +33,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSetDefaultDialog() {
+
         // Inflate the custom dialog layout
         LayoutInflater inflater = LayoutInflater.from(this);
         View dialogView = inflater.inflate(R.layout.dialog_set_default, null);
 
         // Set up the RadioButtons
-        radio1 = dialogView.findViewById(R.id.radio1);
-        radio2 = dialogView.findViewById(R.id.radio2);
-        text2 = dialogView.findViewById(R.id.text2);
+        radioSelectApp = dialogView.findViewById(R.id.radio_select_app);
+        radioSelectPhone = dialogView.findViewById(R.id.radio_select_phone);
+        txtAppDescription = dialogView.findViewById(R.id.content_select_app);
 
         // Initially hide text2
-        text2.setVisibility(View.GONE);
+        txtAppDescription.setVisibility(View.GONE);
 
         // Set radio2 as the default selection
-        radio2.setChecked(true);
+        radioSelectPhone.setChecked(true);
 
         // Create and display an AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCustomTitle(dialogView);
 
         // Set up the dialog with a positive and negative button
-        builder.setPositiveButton("デフォルトに設定", null);
-        builder.setNegativeButton("キャンセル", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton(R.string.confirm_set_default, null);
+        builder.setNegativeButton(R.string.cancel_set_default, (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -66,33 +68,38 @@ public class MainActivity extends AppCompatActivity {
         positiveButton.setTextColor(Color.GRAY);
 
         // Handle RadioButton clicks manually to ensure single selection
-        radio1.setOnClickListener(v -> {
-            radio1.setChecked(true);
-            radio2.setChecked(false);
+        radioSelectApp.setOnClickListener(v -> {
+
+            radioSelectApp.setChecked(true);
+            radioSelectPhone.setChecked(false);
             positiveButton.setEnabled(true);  // Enable the positive button
             positiveButton.setTextColor(Color.rgb(72,37,138));  // Change the text color to blue
 
             // Show text2 when radio1 is selected
-            text2.setVisibility(View.VISIBLE);
+            txtAppDescription.setVisibility(View.VISIBLE);
         });
 
-        radio2.setOnClickListener(v -> {
-            radio1.setChecked(false);
-            radio2.setChecked(true);
+        radioSelectPhone.setOnClickListener(v -> {
+
+            radioSelectApp.setChecked(false);
+            radioSelectPhone.setChecked(true);
             positiveButton.setEnabled(false);  // Disable the positive button
             positiveButton.setTextColor(Color.GRAY);  // Change the text color back to gray
 
-            text2.setVisibility(View.GONE);
+            txtAppDescription.setVisibility(View.GONE);
         });
 
         // Set an onClickListener for the positive button after it is shown
         positiveButton.setOnClickListener(v -> {
-            if (radio1.isChecked()) {
-                Toast.makeText(MainActivity.this, "電話 現在のデフォルトが選択されました", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, Favorite.class);
+
+            if (radioSelectApp.isChecked()) {
+
+                Toast.makeText(MainActivity.this, R.string.alert_set_default_app, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, FavoriteListContainer.class);
                 startActivity(intent);
-            } else if (radio2.isChecked()) {
-                Toast.makeText(MainActivity.this, "電話が選択されました", Toast.LENGTH_SHORT).show();
+            } else if (radioSelectPhone.isChecked()) {
+
+                Toast.makeText(MainActivity.this, R.string.alert_set_default_phone, Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();  // Close the dialog after the positive action
         });

@@ -15,19 +15,19 @@
 
     <!-- Title Text -->
     <TextView
-        android:id="@+id/dialogTitle"
+        android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
-        android:text="電話 をデフォルトの電話アプリとして設定しますか?"
+        android:text="@string/set_default_title"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <!-- Radio Group -->
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radio_select_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -42,9 +42,10 @@
             android:layout_marginTop="16dp">
 
             <ImageView
-                android:id="@+id/app_phone_icon"
+                android:id="@+id/select_app_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/phone_bule_all1" />
 
             <!-- Nested Vertical LinearLayout -->
@@ -56,27 +57,28 @@
                 android:layout_marginLeft="8dp">
 
                 <TextView
-                    android:id="@+id/text1"
+                    android:id="@+id/title_select_app"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="電話"
+                    android:text="@string/set_item_title"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/text2"
+                    android:id="@+id/content_select_app"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="通話履歴へのアクセス権、SMSの送信権限が必要です"
+                    android:text="@string/set_item_app_content"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
             </LinearLayout>
 
             <RadioButton
-                android:id="@+id/radio1"
+                android:id="@+id/radio_select_app"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"/>
 
         </LinearLayout>
 
@@ -90,9 +92,10 @@
             android:layout_marginTop="16dp">
 
             <ImageView
-                android:id="@+id/default_phone_icon"
+                android:id="@+id/select_phone_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/phone_blue_outline1" />
 
             <!-- Nested Vertical LinearLayout -->
@@ -104,25 +107,25 @@
                 android:layout_marginLeft="8dp">
 
                 <TextView
-                    android:id="@+id/text3"
+                    android:id="@+id/title_select_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="電話"
+                    android:text="@string/set_item_title"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/text4"
+                    android:id="@+id/content_select_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="現在のデフォルト"
+                    android:text="@string/set_item_phone_content"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
             </LinearLayout>
 
             <RadioButton
-                android:id="@+id/radio2"
+                android:id="@+id/radio_select_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

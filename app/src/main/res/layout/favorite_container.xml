@@ -5,74 +5,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Favorite">
+    tools:context=".FavoriteListContainer">
 
-    <!-- Search Bar -->
     <LinearLayout
-        android:id="@+id/search_bar"
+        android:id="@+id/favorite_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="horizontal"
-        android:background="@color/search_bar_background"
+        android:background="@drawable/search_bar_background"
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:contentDescription="@string/favorite_search"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/search_icon" />
 
         <EditText
-            android:id="@+id/search_edit_text"
+            android:id="@+id/favorite_search_keyword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxHeight="27dp"
             android:layout_weight="1"
-            android:hint="Search"
             android:textSize="20sp"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:background="@android:color/transparent"/>
+
+        <ImageView
+            android:contentDescription="@string/favorite_search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_voice_recognition" />
     </LinearLayout>
 
     <!-- Labels above RecyclerView -->
     <TextView
-        android:id="@+id/favorites_label"
+        android:id="@+id/favorite_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="お気に入り"
+        android:text="@string/favorite_title"
+        android:textSize="14sp"
+        android:textColor="#6E6E6E"
+        app:layout_constraintTop_toBottomOf="@id/favorite_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@id/favorite_list"
+        android:layout_marginTop="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
+    <TextView
+        android:id="@+id/favorite_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favorite_add"
         android:textSize="18sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/add_contact"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="16dp" />
-    <TextView
-        android:id="@+id/add_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="追加"
-        android:textSize="18sp"
-        android:textColor="#0000FF"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/favorite_search"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="10dp"
-        android:paddingRight="16dp"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
 
-    <!-- RecyclerView for Contacts -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_for_favorite"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/favorites_label"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clipChildren="true"
+        app:flow_horizontalAlign="start"
+        app:flow_verticalAlign="top"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_list"
+        tools:ignore=",MissingConstraints">
+
+        <ListView
+            android:id="@+id/container_favorite_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp" />
+    </ScrollView>
+
 
     <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
